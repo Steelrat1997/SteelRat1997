@@ -1,0 +1,101 @@
+'''
+Кондрашов Константин ИУ7-23
+Лабораторная N2
+Создать меню из трех пунктов:
+0 - выход
+1 - создание файла
+2 - добавление записи в конец файла
+3 - поиск информации в файле
+
+Выполнить заданные требования по вызову
+'''
+
+from math import *
+
+#Основная функция
+def main():
+
+    case = 1
+    while case != 0:
+        
+        #Вывод таблицы
+        print('-'*82)
+        print('\n'*2, 'Выберите пункт:')
+        print ('_'*82)
+        print ('|','{:^25s}'.format('0'),
+               '|', '{:^50s}'.format('Выход'), '|')
+        print ('_'*82)
+        print ('|','{:^25s}'.format('1'),
+               '|', '{:^50s}'.format('Создание файла'), '|')
+        print ('_'*82)
+        print ('|','{:^25s}'.format('2'),
+               '|', '{:^50s}'.format('Добавление записи в конец файла'), '|')
+        print ('_'*82)
+        print ('|','{:^25s}'.format('3'),
+               '|', '{:^50s}'.format('Поиск информации по имени'), '|')
+        print ('_'*82)
+        print ('|','{:^25s}'.format('4'),
+               '|', '{:^50s}'.format('Очистка файла'), '|')
+        print ('_'*82)
+        print ('|','{:^25s}'.format('5'),
+               '|', '{:^50s}'.format('Просмотр файла'), '|')
+        print ('_'*82)
+
+        #Ввод
+        case = int(input('\nПункт:'))
+        while not(case in [0, 1, 2, 3, 4, 5]):
+            case = int(input('\nВвод:'))
+        print()
+        print()
+        print('-'*82)
+
+        #0
+        if case == 0:
+            return 0
+
+
+        #1
+        if case == 1:
+            f = open('file.txt','tw')
+            f.close()
+            print('Файл создан')
+
+
+
+        #2
+        if case == 2:
+            f = open('file.txt', 'a')
+            if f.tell() != 0:
+                f.write('\n')
+            f.write(input('Имя:').replace(' ', '') + ' ')
+            f.write(input('Рост, см:').replace(' ', '') + ' ')
+            f.write(input('Вес, кг:').replace(' ', ''))
+            f.close()
+
+        #3
+        if case == 3:
+            name = input('Введите имя, по которому хотите искать:')
+            f = open('file.txt', 'r')
+            print('Результаты поиска:')
+            for line in f:
+                #print(1)
+                #print(line.split(' ')[1])
+                if line.split(' ')[0] == name:
+                    print(line)
+
+        #4
+        if case == 4:
+            f = open('file.txt', 'w')
+            f.close()
+            print('Файл очищен')
+
+        #5
+        if case == 5:
+            f = open('file.txt', 'r')
+            print('Файл:')
+            print(f.read())
+            f.close()
+            
+main()
+
+
